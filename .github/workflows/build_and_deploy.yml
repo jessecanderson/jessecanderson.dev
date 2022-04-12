@@ -6,9 +6,9 @@ name: Build and Deploy
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,15 +28,16 @@ jobs:
       # Setup Hugo with latest version
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
-        with: 
+        with:
           hugo-version: latest
 
-      - name: Run 
+      - name: Run
         run: hugo --minify
-      
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          cname: jessecanderson.dev
