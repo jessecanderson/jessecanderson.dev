@@ -12,7 +12,7 @@ tags = ["career", "developer", "code", "learning", "flutter"]
 
 ## Welcome Back
 
-So, it has been a <b>WHILE</b> since I posted anything to this blog. The last couple of years I have just lost motivation and direction. I've kind of floated through doing my job and not really building skills as deeply as I once did. So, with the new year here and me trying to work on my motivation I'm going to start a new series. I'm going to call it <b>Starting Flutter!</b> and I hope this will be an ongoing series of interesting Flutter topics.
+So, it has been a **WHILE** since I posted anything to this blog. The last couple of years I have just lost motivation and direction. I've kind of floated through doing my job and not really building skills as deeply as I once did. So, with the new year here and me trying to work on my motivation I'm going to start a new series. I'm going to call it **Starting Flutter!** and I hope this will be an ongoing series of interesting Flutter topics.
 
 This maybe the series depending on how it goes:
 
