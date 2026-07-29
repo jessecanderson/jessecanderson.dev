@@ -1,0 +1,13 @@
+---
+title: "Your field note title"
+description: "One sentence used on the notes index and in link previews."
+published: 2026-07-29
+tags: [ai, learning]
+draft: true
+---
+
+Start writing here. English, Japanese, and mixed-language content are supported.
+
+## 日本語の見出し
+
+日本語でのフィールドノートも、そのまま Markdown で書けます。

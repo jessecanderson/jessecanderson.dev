@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const notes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b)=>b.data.published.valueOf()-a.data.published.valueOf());
+---
+<BaseLayout title="Field Notes — Jesse Anderson" description="Build logs, experiments, and lessons from software, systems, and AI.">
+  <main class="notes-page shell">
+    <header class="archive-header"><a class="wordmark" href="/">JA<span>.</span></a><nav aria-label="Field Notes navigation"><a href="/">Portfolio</a><a href="/archive/">Archive</a><a href="/rss.xml">RSS</a></nav></header>
+    <p class="mono section-number">FIELD NOTES / PRESENT</p><h1>Learning in public.</h1>
+    <p class="archive-intro">Build logs, experiments, decisions, and lessons from making useful software with AI.</p>
+    <div class="field-note-list">{notes.map((note,index)=><article><div class="field-note-meta"><time datetime={note.data.published.toISOString()}>{note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</time><span>{note.data.tags.join(" · ")}</span></div><div><span class="note-type">Field note / {String(index+1).padStart(2,"0")}</span><h2><a href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`}>{note.data.title}</a></h2><p>{note.data.description}</p></div><a class="field-note-arrow" href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`} aria-label={`Read ${note.data.title}`}>↗</a></article>)}</div>
+    <aside class="archive-callout"><div><p class="mono">2014—2022</p><h2>The earlier archive</h2></div><p>Older writing on infrastructure, mobile development, learning, and career changes remains available as part of the record.</p><a href="/archive/">Browse the archive ↗</a></aside>
+  </main>
+</BaseLayout>

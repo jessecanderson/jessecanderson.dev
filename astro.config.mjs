@@ -1,2 +1,4 @@
 import { defineConfig } from "astro/config";
-export default defineConfig({ site: "https://jessecanderson.dev", output: "static", publicDir: "./static", trailingSlash: "always" });
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+export default defineConfig({ site: "https://jessecanderson.dev", output: "static", publicDir: "./static", trailingSlash: "always", integrations: [mdx(), sitemap()] });
