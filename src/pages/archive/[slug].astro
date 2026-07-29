@@ -1,0 +1,7 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getArchivePosts, type ArchivePost } from "../../lib/archive";
+export function getStaticPaths(){return getArchivePosts().map(post=>({params:{slug:post.slug},props:{post}}))}
+const {post}=Astro.props as {post:ArchivePost};
+---
+<BaseLayout title={`${post.title} — Jesse Anderson`} description={`An archived field note from ${post.date.getFullYear()}.`}><main class="post shell"><header class="archive-header"><a class="wordmark" href="/">JA<span>.</span></a><a class="header-link" href="/archive/">← Archive</a></header><article><p class="mono section-number">ARCHIVE / {post.date.getFullYear()}</p><h1>{post.title}</h1><div class="post-meta">{post.tags.join(" · ")}</div><div class="post-body" set:html={post.html}></div></article></main></BaseLayout>

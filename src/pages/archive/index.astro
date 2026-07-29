@@ -1,0 +1,6 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getArchivePosts } from "../../lib/archive";
+const posts=getArchivePosts();
+---
+<BaseLayout title="Writing Archive — Jesse Anderson" description="Earlier writing about software, infrastructure, learning, and career changes."><main class="archive shell"><header class="archive-header"><a class="wordmark" href="/">JA<span>.</span></a><a class="header-link" href="/">← Portfolio</a></header><p class="mono section-number">WRITING / 2014–2022</p><h1>Earlier field notes.</h1><p class="archive-intro">An unpolished record of technologies explored, careers changed, and lessons learned along the way.</p><div class="archive-list">{posts.map(post=><article><time datetime={post.date.toISOString()}>{post.date.getFullYear()}</time><div><h2><a href={`/archive/${post.slug}/`}>{post.title}</a></h2><p>{post.tags.join(" · ")}</p></div><a href={`/archive/${post.slug}/`} aria-label={`Read ${post.title}`}>↗</a></article>)}</div></main></BaseLayout>

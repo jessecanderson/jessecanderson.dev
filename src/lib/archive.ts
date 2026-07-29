@@ -1,0 +1,6 @@
+import { marked } from "marked";
+const files = import.meta.glob("../../content/blog/*.md", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+export type ArchivePost = { slug:string; title:string; date:Date; tags:string[]; html:string; draft:boolean };
+function value(source:string,key:string){return source.match(new RegExp(`^${key}\\s*=\\s*["']([^"']+)["']`,"m"))?.[1]}
+function parse(path:string,source:string):ArchivePost{const match=source.match(/^\+\+\+\s*\n([\s\S]*?)\n\+\+\+\s*\n?([\s\S]*)$/);const frontmatter=match?.[1]??"";const body=match?.[2]??source;const filename=path.split("/").pop()?.replace(/\.md$/,"")??"post";const tagsSource=frontmatter.match(/^tags\s*=\s*\[([^\]]*)\]/m)?.[1]??"";return{slug:filename.replace(/^\d{4}-\d{2}-\d{2}-/,"").toLowerCase(),title:value(frontmatter,"title")??filename,date:new Date(value(frontmatter,"date")??"1970-01-01"),tags:tagsSource.split(",").map(tag=>tag.trim().replace(/^['"]|['"]$/g,"")).filter(Boolean),html:marked.parse(body) as string,draft:/^draft\s*=\s*true/m.test(frontmatter)||path.endsWith("2022-06-05-acceptance.md")}}
+export function getArchivePosts(){return Object.entries(files).map(([path,source])=>parse(path,source)).filter(post=>!post.draft).sort((a,b)=>b.date.valueOf()-a.date.valueOf())}
