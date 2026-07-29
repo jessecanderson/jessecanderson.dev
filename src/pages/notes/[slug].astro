@@ -1,0 +1,10 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+export async function getStaticPaths(){const notes=await getCollection("notes",({data})=>!data.draft);return notes.map(note=>({params:{slug:note.id.replace(/\.(md|mdx)$/,"")},props:{note}}))}
+const {note}=Astro.props;
+const {Content}=await render(note);
+---
+<BaseLayout title={`${note.data.title} — Jesse Anderson`} description={note.data.description}>
+  <main class="post field-note-post shell"><header class="archive-header"><a class="wordmark" href="/">JA<span>.</span></a><a class="header-link" href="/notes/">← Field Notes</a></header><article><p class="mono section-number">FIELD NOTE / {note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase()}</p><h1>{note.data.title}</h1><p class="post-dek">{note.data.description}</p><div class="post-meta">{note.data.tags.join(" · ")}</div><div class="post-body"><Content /></div></article></main>
+</BaseLayout>
