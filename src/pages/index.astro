@@ -3,15 +3,70 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b)=>b.data.published.valueOf()-a.data.published.valueOf()).slice(0,2);
 ---
-<BaseLayout><main id="top">
-<header class="site-header shell"><a class="wordmark" href="#top" aria-label="Jesse Anderson, home">JA<span>.</span></a><nav aria-label="Primary navigation"><a href="#work">Work</a><a href="#notes">Notes</a><a href="#about">About</a></nav><a class="header-link" href="https://github.com/jessecanderson">GitHub ↗</a></header>
-<section class="hero shell"><div class="hero-index mono">PORTFOLIO / 2026</div><div class="hero-grid"><div><p class="eyebrow"><span></span>Jesse Anderson · Software Engineer</p><h1>I build software<br><em>to understand</em><br>what comes next.</h1></div><div class="hero-aside"><p>Software engineer at The Walt Disney Company with a background spanning infrastructure, cloud architecture, and product development. Now focused on AI tooling and developer experience.</p><a class="text-link" href="#work">See what I’m building ↓</a></div></div><div class="hero-rule"></div></section>
-<section class="work shell" id="work"><div class="section-head"><div><p class="mono section-number">01 / SELECTED WORK</p><h2>Things worth<br>building.</h2></div><p class="section-intro">Products and experiments built in the open, then improved through real use.</p></div><div class="projects">
-<article class="project"><div class="project-top"><span class="mono">/01</span><span class="status"><i></i>Actively building</span></div><div class="project-visual terminal"><img src="https://raw.githubusercontent.com/jessecanderson/cyberdeck/main/docs/screenshots/agent-command.svg" alt="Cyberdeck agent command center interface"></div><p class="project-kicker mono">Local AI agent command center</p><h3>Cyberdeck</h3><p class="project-copy">A neon, keyboard-first terminal interface for running multiple local coding agents. Built around fast context switching, visible permission boundaries, and a shared runtime that can grow with new providers and modules.</p><ul class="tags" aria-label="Cyberdeck technologies"><li>Python</li><li>Textual</li><li>Codex</li><li>ACP</li><li>Open source</li></ul><a class="project-link" href="https://github.com/jessecanderson/cyberdeck">View the project <span>↗</span></a></article>
-<article class="project"><div class="project-top"><span class="mono">/02</span><span class="status"><i></i>In development</span></div><div class="project-visual map" aria-hidden="true"><div class="contour"></div><div class="route"></div><b class="pin a">●</b><b class="pin b">●</b><span class="map-label one">RED RIVER GORGE</span><span class="map-label two">CAMP / 04</span></div><p class="project-kicker mono">The whole climbing trip, in one place</p><h3>ClimbSite</h3><p class="project-copy">A climber-focused trip planner connecting areas, nearby camping, approach notes, parking friction, and trusted source links. Starting with the Red River Gorge and designed to complement—not replace—guidebooks.</p><ul class="tags" aria-label="ClimbSite technologies"><li>Next.js</li><li>Postgres</li><li>Maps</li><li>Auth.js</li><li>Product design</li></ul><a class="project-link" href="https://github.com/jessecanderson/ClimbSite">View the project <span>↗</span></a></article>
-<article class="project"><div class="project-top"><span class="mono">/03</span><span class="status"><i></i>Starting now</span></div><div class="project-visual workbench" aria-label="Agent Workbench learning loop"><div class="workbench-head mono">AGENT WORKBENCH <span>RUN 001</span></div><div class="workbench-lines mono"><span>→ inspect repository</span><span>→ validate tool arguments</span><span>→ evaluate structured review</span></div><div class="workbench-foot mono">READ-ONLY / LOCAL FIRST</div></div><p class="project-kicker mono">Learning how useful agents actually run</p><h3>Agent Workbench</h3><p class="project-copy">A small Python lab for understanding agent loops from the inside out: tools, structured outputs, evaluation, and the boundaries that make an AI system dependable.</p><ul class="tags" aria-label="Agent Workbench technologies"><li>Python</li><li>OpenAI</li><li>FastAPI</li><li>AWS</li><li>Agent systems</li></ul><a class="project-link" href="https://github.com/jessecanderson/agent-workbench">View the project <span>↗</span></a></article>
-</div></section>
-<section class="notes shell" id="notes"><div class="section-head"><div><p class="mono section-number">02 / FIELD NOTES</p><h2>Learning in public.</h2></div><p class="section-intro">Working notes on AI, product decisions, and the messy middle of making things.</p></div><div class="note-list">{recentNotes.map((note,index)=><a class="note" href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`}><span class="mono">{note.data.published.toLocaleDateString("en-US",{month:"short",year:"numeric"}).toUpperCase()}</span><div><small>FIELD NOTE</small><h3>{note.data.title}</h3></div><b>{String(index+1).padStart(2,"0")}</b></a>)}<a class="note" href="/notes/"><span class="mono">ALL NOTES</span><div><small>WRITING</small><h3>Browse the Field Notes</h3></div><b>↗</b></a><a class="note" href="/archive/"><span class="mono">ARCHIVE</span><div><small>2014—2022</small><h3>Earlier notes, projects, and ideas</h3></div><b>↗</b></a></div></section>
-<section class="about shell" id="about"><p class="mono section-number">03 / ABOUT</p><div class="about-grid"><div><h2>Curious by default.<br><em>Shipping on purpose.</em></h2><ul class="professional-snapshot" aria-label="Professional snapshot"><li><span>2007</span> Technology career began</li><li><span>2018</span> Professional software development</li><li><span>AWS</span> Former Solutions Architect</li><li><span>NOW</span> AI tooling & developer experience</li></ul></div><div><p>I’m Jesse Anderson, a software engineer at The Walt Disney Company. I’ve worked in technology since 2007, beginning in infrastructure and systems administration. Along the way, I spent a year as a Solutions Architect at AWS, building a deeper understanding of cloud architecture and how complex systems fit together.</p><p>I’ve been developing software professionally since 2018, but my path into development was largely self-taught. That background shapes how I work: understand the system beneath the abstraction, follow how the pieces connect, and keep building until an idea becomes useful.</p><p>Today, I’m focused on AI tooling and developer experience—building Cyberdeck to explore multi-agent workflows, developing ClimbSite as a practical product, and using Agent Workbench to learn the mechanics behind dependable agents.</p><a class="text-link" href="mailto:hello@jesseanderson.dev">Start a conversation ↗</a></div></div></section>
-<footer class="shell"><div class="footer-mark">JA<span>.</span></div><p>Building, learning, documenting.</p><div><a href="https://github.com/jessecanderson">GitHub</a><a href="mailto:hello@jessecanderson.dev">Email</a><a href="#top">Top ↑</a></div></footer>
-</main></BaseLayout>
+<BaseLayout title="Jesse Anderson — The road so far" description="A field notebook about software, systems, AI, and the long way around.">
+<main id="top" class="journey">
+  <header class="site-header shell">
+    <a class="wordmark" href="#top" aria-label="Jesse Anderson, home"><b>Jesse Anderson</b><span>field notes / 旅</span></a>
+    <nav aria-label="Primary navigation"><a href="#path">The path</a><a href="#work">Current work</a><a href="#notes">Notes</a></nav>
+    <a class="header-link" href="mailto:hello@jesseanderson.dev">Say hello ↗</a>
+  </header>
+
+  <section class="hero shell">
+    <div class="margin-note mono">VOLUME 01<br>2007—NOW<br><span>更新中 / IN PROGRESS</span></div>
+    <div class="hero-copy">
+      <p class="eyebrow">A field notebook by Jesse Anderson</p>
+      <h1>The road<br>is the <em>work.</em></h1>
+      <p class="dek">I’m a software engineer who took the long way here—through server rooms, cloud architecture, product code, and now AI. This is where I keep the things I’m building and what they’re teaching me.</p>
+      <a class="text-link" href="#path">Begin at the beginning ↓</a>
+    </div>
+    <aside class="hero-stamp" aria-label="The journey continues"><span>道</span><small>THE WAY<br>CONTINUES</small></aside>
+    <p class="pencil-note">Still learning. Still making.<br>Usually the hard way.</p>
+  </section>
+
+  <section class="path shell" id="path">
+    <header class="chapter-head"><span class="chapter-no">一</span><div><p class="mono">CHAPTER ONE / THE LONG WAY AROUND</p><h2>How I got here.</h2></div></header>
+    <div class="route-line" aria-label="Career journey from infrastructure to AI tooling">
+      <article><time>2007</time><i></i><div><small>THE FOUNDATION</small><h3>Infrastructure</h3><p>Servers, networks, and systems administration. I learned to look beneath the interface and understand what keeps a system alive.</p></div></article>
+      <article><time>2018</time><i></i><div><small>THE TURN</small><h3>Software</h3><p>A self-taught path into professional development. Building became the way I learned—and the way I made ideas useful.</p></div></article>
+      <article><time>AWS</time><i></i><div><small>THE WIDE VIEW</small><h3>Architecture</h3><p>A year as a Solutions Architect taught me to see the whole landscape: people, constraints, tradeoffs, and the connections between them.</p></div></article>
+      <article><time>NOW</time><i></i><div><small>THE OPEN ROAD</small><h3>AI & tools</h3><p>At Disney, and in my own work, I’m exploring how people can build with capable agents without giving up understanding or responsibility.</p></div></article>
+    </div>
+    <p class="side-script">遠回りにも意味がある<br><span>There is meaning in the long way around.</span></p>
+  </section>
+
+  <section class="work shell" id="work">
+    <header class="chapter-head"><span class="chapter-no">二</span><div><p class="mono">CHAPTER TWO / CURRENT EXPEDITIONS</p><h2>What I’m carrying forward.</h2></div></header>
+    <div class="projects">
+      <article class="project featured">
+        <div class="project-meta"><span>PROJECT 001</span><span class="status"><i></i>Actively building</span></div>
+        <div class="project-body"><div><p class="project-kicker">LOCAL AI AGENT COMMAND CENTER</p><h3>Cyberdeck</h3><blockquote>“Code became cheap.<br>Understanding did not.”</blockquote></div><div><p>A keyboard-first home for running multiple local coding agents without losing track of the work—or my responsibility for it.</p><p class="why"><b>Why I’m building it</b> To understand what dependable agent systems actually need: identity, visible state, honest permissions, and an operator who remains in control.</p><ul class="tags"><li>Python</li><li>Textual</li><li>Agent systems</li><li>Open source</li></ul><a class="project-link" href="https://github.com/jessecanderson/cyberdeck">Open the project ↗</a></div></div>
+      </article>
+      <article class="project">
+        <div class="project-meta"><span>PROJECT 002</span><span class="status"><i></i>In development</span></div>
+        <div class="project-body"><div><p class="project-kicker">A CLIMBER’S TRIP NOTEBOOK</p><h3>ClimbSite</h3><div class="topo-mark" aria-hidden="true"><span>RED RIVER<br>GORGE</span></div></div><div><p>A trip planner connecting climbing areas with camping, approaches, parking, and the practical details that shape a weekend outside.</p><p class="why"><b>Why I’m building it</b> Because the best days outside begin long before the first climb—and useful local knowledge is usually scattered everywhere.</p><ul class="tags"><li>Next.js</li><li>Maps</li><li>Product design</li></ul><a class="project-link" href="https://github.com/jessecanderson/ClimbSite">Open the project ↗</a></div></div>
+      </article>
+      <article class="project">
+        <div class="project-meta"><span>PROJECT 003</span><span class="status"><i></i>Learning now</span></div>
+        <div class="project-body"><div><p class="project-kicker">A SMALL LAB FOR AGENT MECHANICS</p><h3>Agent<br>Workbench</h3><p class="pencil-note">Take it apart.<br>Put it back together.<br>Understand every piece.</p></div><div><p>A deliberately small Python lab for learning agent loops from the inside: tools, structured outputs, evaluation, and safe boundaries.</p><p class="why"><b>Why I’m building it</b> I don’t want to understand AI only from the surface. This is the notebook where I test the machinery.</p><ul class="tags"><li>Python</li><li>OpenAI</li><li>Evaluation</li></ul><a class="project-link" href="https://github.com/jessecanderson/agent-workbench">Open the project ↗</a></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="notes shell" id="notes">
+    <header class="chapter-head"><span class="chapter-no">三</span><div><p class="mono">CHAPTER THREE / NOTES FROM THE ROAD</p><h2>Learning, recorded.</h2></div></header>
+    <p class="notes-intro">Not thought leadership. Just an honest record of decisions, dead ends, things that worked, and what I understand now that I didn’t before.</p>
+    <div class="note-list">{recentNotes.map((note,index)=><a class="note" href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`}><span class="note-index">{String(index+1).padStart(2,"0")}</span><time>{note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</time><div><small>FIELD NOTE</small><h3>{note.data.title}</h3><p>{note.data.description}</p></div><b>↗</b></a>)}</div>
+    <div class="notes-links"><a href="/notes/">All field notes ↗</a><a href="/archive/">The earlier archive, 2014—2022 ↗</a></div>
+  </section>
+
+  <section class="about shell" id="about">
+    <div class="hanko" aria-hidden="true">J<br>A</div>
+    <p class="mono">A NOTE FROM JESSE</p>
+    <h2>I’m not trying to arrive.</h2>
+    <div class="about-copy"><p>I’ve spent nearly two decades following my curiosity through technology. The labels have changed—systems administrator, developer, solutions architect, software engineer—but the habit underneath has stayed the same: get close to the machinery, ask how the pieces connect, and make something that helps.</p><p>This site is a record of that journey while it is still happening. If something here connects with what you’re working through, I’d be glad to hear from you.</p></div>
+    <a class="text-link" href="mailto:hello@jesseanderson.dev">Write to me ↗</a>
+  </section>
+
+  <footer class="shell"><p>Jesse Anderson · somewhere along the way</p><div><a href="https://github.com/jessecanderson">GitHub</a><a href="/rss.xml">RSS</a><a href="#top">Top ↑</a></div></footer>
+</main>
+</BaseLayout>
