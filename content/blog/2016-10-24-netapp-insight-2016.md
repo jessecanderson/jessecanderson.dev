@@ -20,7 +20,7 @@ DevOps (a combination of developer and operations), is an IT philosophy that is 
 
 At Insight 2016 in Las Vegas, NetApp put a big focus on DevOps. The “Developer Café” was the hub of all the action, giving attendees the opportunity to get a glimpse into the cool things that NetApp is doing with DevOps. In addition to the NetApp DevOps leaders, the Developer Café was ground zero for several other key players including Docker, Ansible, Puppet, and Chef. The new “NetApp.io” hub page is another concrete step towards the open, collaborative framework that DevOps enables—they even gave it its own main stage demo! And of course, there were a smattering of awesome hands-on labs with SolidFire and the like that were really speaking my language as far as DevOps goes. It was a clear indication for me that NetApp is making that cultural shift towards DevOps in a clear, definitive way, and I couldn’t be more excited about it.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vmrrAkutoto" frameborder="0" allowfullscreen></iframe>
+*The video embedded in the original post is now private and is no longer available to view.*
 
 When I first got into NetApp technology about five years ago, I remember somebody telling me that NetApp wasn’t even a hardware company. They told me that NetApp was a software company that “just happened to make hardware.” That idea stuck with me ever since, and really came to a head at this year’s conference. To see NetApp embrace this way of thinking and make a fundamental, cultural shift towards a developer-centric viewpoint was really impactful for me.
 

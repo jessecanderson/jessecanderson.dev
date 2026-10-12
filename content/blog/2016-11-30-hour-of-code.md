@@ -20,7 +20,7 @@ Where do you find resources for that hour? Well, there is a great site call [Hou
 
 Here is what it means to take that hour:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KsOIlDT145A" frameborder="0" allowfullscreen></iframe>
+<iframe title="Hour of Code video" loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/KsOIlDT145A" frameborder="0" allowfullscreen></iframe>
 
 Please consider taking this hour. Take it yourself and see if your interested or do like me and share with your kids or just whomever will listen to you. Learning to code helps with critical thinking skills and understanding computers. These are key to not only our futures but our children's futures.
 

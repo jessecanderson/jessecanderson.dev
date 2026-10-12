@@ -1,0 +1,12 @@
+---
+interface Props { archive?: boolean; }
+const { archive = false } = Astro.props;
+---
+<nav class="article-navigation" aria-label="Continue reading">
+  <a class="text-link" href={archive ? "/archive/" : "/notes/"}>
+    {archive ? "← All archived writing" : "← All field notes"}
+  </a>
+  <a class="text-link" href={archive ? "/notes/" : "/#work"}>
+    {archive ? "Read recent field notes ↗" : "Explore current projects ↗"}
+  </a>
+</nav>

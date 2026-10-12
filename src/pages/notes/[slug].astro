@@ -1,10 +1,38 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleNavigation from "../../components/ArticleNavigation.astro";
+import PostMeta from "../../components/PostMeta.astro";
+import PostOutline from "../../components/PostOutline.astro";
+import { readingMinutes } from "../../lib/reading";
 export async function getStaticPaths(){const notes=await getCollection("notes",({data})=>!data.draft);return notes.map(note=>({params:{slug:note.id.replace(/\.(md|mdx)$/,"")},props:{note}}))}
 const {note}=Astro.props;
-const {Content}=await render(note);
+const {Content, headings}=await render(note);
+const relatedNotes = (await getCollection("notes", ({ data }) => !data.draft))
+  .filter((candidate) => candidate.id !== note.id)
+  .map((candidate) => ({ candidate, matches: candidate.data.tags.filter((tag: string) => note.data.tags.includes(tag)).length }))
+  .filter(({ matches }) => matches > 0)
+  .sort((a, b) => b.matches - a.matches || b.candidate.data.published.valueOf() - a.candidate.data.published.valueOf())
+  .slice(0, 2);
 ---
-<BaseLayout title={`${note.data.title} — Jesse Anderson`} description={note.data.description}>
-  <main class="post field-note-post shell"><header class="archive-header"><a class="wordmark" href="/">JA<span>.</span></a><a class="header-link" href="/notes/">← Field Notes</a></header><article><p class="mono section-number">FIELD NOTE / {note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase()}</p><h1>{note.data.title}</h1><p class="post-dek">{note.data.description}</p><div class="post-meta">{note.data.tags.join(" · ")}</div><div class="post-body"><Content /></div></article></main>
+<BaseLayout title={`${note.data.title} — Jesse Anderson`} description={note.data.description} article={note.data} image={`/social/notes/${note.id}.png`}>
+  <main id="main-content" tabindex="-1" class="post field-note-post shell">
+    <a class="text-link back-link" href="/notes/">← Field Notes</a>
+    <article>
+      <p class="mono section-number">FIELD NOTE / {note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}).toUpperCase()}</p>
+      <h1>{note.data.title}</h1>
+      <p class="post-dek">{note.data.description}</p>
+      <PostMeta published={note.data.published} updated={note.data.updated} minutes={readingMinutes(note.body ?? "")} tags={note.data.tags} />
+      <PostOutline headings={headings} />
+      <div class="post-body"><Content /></div>
+    </article>
+    {relatedNotes.length > 0 && <aside class="related-notes" aria-labelledby="related-heading">
+      <h2 id="related-heading">Related field notes</h2>
+      <ul>{relatedNotes.map(({ candidate }) => <li>
+        <a href={`/notes/${candidate.id}/`}>{candidate.data.title}</a>
+        <p>{candidate.data.description}</p>
+      </li>)}</ul>
+    </aside>}
+    <ArticleNavigation />
+  </main>
 </BaseLayout>

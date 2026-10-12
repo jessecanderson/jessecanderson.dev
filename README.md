@@ -31,6 +31,8 @@ draft: false
 
 Use `.md` for normal posts. Use `.mdx` when a post needs an embedded component or interactive demonstration.
 
+Notes automatically receive reading time, an outline when they have at least three second-level headings, related notes based on shared tags, and a title-specific sharing image. Add an optional `updated` date to show when an existing note was revised.
+
 ## Local development
 
 ```sh
@@ -44,3 +46,9 @@ Validate the production site with:
 ```sh
 npm run build
 ```
+
+The build also checks local links, assets, fragment targets, shared page landmarks, article metadata, and CSS variables. To rerun those checks against an existing build, use `npm run check:site`.
+
+Shared navigation and article elements live in `src/components/`. Active styles are in `static/portfolio.css`, `static/archive.css`, and `static/notes.css`. Sharing images are generated at build time by `src/pages/social/[...slug].png.ts`.
+
+The Cyberdeck capture in `static/images/cyberdeck-agent-command.svg` comes from the project’s `docs/screenshots/agent-command.svg`. Replace it with a fresh public sample capture when the interface changes.

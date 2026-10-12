@@ -4,12 +4,7 @@ import { getCollection } from "astro:content";
 const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b)=>b.data.published.valueOf()-a.data.published.valueOf()).slice(0,2);
 ---
 <BaseLayout title="Jesse Anderson — The road so far" description="A field notebook about software, systems, AI, and the long way around.">
-<main id="top" class="journey">
-  <header class="site-header shell">
-    <a class="wordmark" href="#top" aria-label="Jesse Anderson, home"><b>Jesse Anderson</b><span>field notes / 旅</span></a>
-    <nav aria-label="Primary navigation"><a href="#path">The path</a><a href="#work">Current work</a><a href="#notes">Notes</a></nav>
-    <a class="header-link" href="mailto:hello@jesseanderson.dev">Say hello ↗</a>
-  </header>
+<main id="main-content" tabindex="-1" class="journey">
 
   <section class="hero shell">
     <div class="margin-note mono">VOLUME 01<br>2007—NOW<br><span>更新中 / IN PROGRESS</span></div>
@@ -17,7 +12,10 @@ const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b
       <p class="eyebrow">A field notebook by Jesse Anderson</p>
       <h1>The road<br>is the <em>work.</em></h1>
       <p class="dek">I’m a software engineer who took the long way here—through server rooms, cloud architecture, product code, and now AI. This is where I keep the things I’m building and what they’re teaching me.</p>
-      <a class="text-link" href="#path">Begin at the beginning ↓</a>
+      <div class="hero-links">
+        <a class="text-link hero-primary" href="#work">Explore the projects ↓</a>
+        <a class="text-link" href="#path">Begin at the beginning ↓</a>
+      </div>
     </div>
     <aside class="hero-stamp" aria-label="The journey continues"><span>道</span><small>THE WAY<br>CONTINUES</small></aside>
     <p class="pencil-note">Still learning. Still making.<br>Usually the hard way.</p>
@@ -39,7 +37,13 @@ const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b
     <div class="projects">
       <article class="project featured">
         <div class="project-meta"><span>PROJECT 001</span><span class="status"><i></i>Actively building</span></div>
-        <div class="project-body"><div><p class="project-kicker">LOCAL AI AGENT COMMAND CENTER</p><h3>Cyberdeck</h3><blockquote>“Code became cheap.<br>Understanding did not.”</blockquote></div><div><p>A keyboard-first home for running multiple local coding agents without losing track of the work—or my responsibility for it.</p><p class="why"><b>Why I’m building it</b> To understand what dependable agent systems actually need: identity, visible state, honest permissions, and an operator who remains in control.</p><ul class="tags"><li>Python</li><li>Textual</li><li>Agent systems</li><li>Open source</li></ul><a class="project-link" href="https://github.com/jessecanderson/cyberdeck">Open the project ↗</a></div></div>
+        <div class="project-body"><div><p class="project-kicker">LOCAL AI AGENT COMMAND CENTER</p><h3>Cyberdeck</h3><blockquote>“Code became cheap.<br>Understanding did not.”</blockquote></div><div><p>A keyboard-first home for running multiple local coding agents without losing track of the work—or my responsibility for it.</p><p class="why"><b>Why I’m building it</b> To understand what dependable agent systems actually need: identity, visible state, honest permissions, and an operator who remains in control.</p><ul class="tags"><li>Python</li><li>Textual</li><li>Agent systems</li><li>Open source</li></ul><div class="project-actions"><a class="project-link" href="https://github.com/jessecanderson/cyberdeck#install">Install Cyberdeck ↗</a><a class="project-link" href="https://github.com/jessecanderson/cyberdeck">Source code ↗</a><a class="project-link" href="/notes/why-i-built-cyberdeck/">Read the build story ↗</a></div></div></div>
+        <figure class="project-figure">
+          <a href="/images/cyberdeck-agent-command.svg" aria-label="View the full Cyberdeck interface capture">
+            <img src="/images/cyberdeck-agent-command.svg" alt="Cyberdeck terminal interface showing the Local Grid, agent activity, and permission controls." width="1970" height="1222" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Agent command center · sample session. Select the capture to view it at full size.</figcaption>
+        </figure>
       </article>
       <article class="project">
         <div class="project-meta"><span>PROJECT 002</span><span class="status"><i></i>In development</span></div>
@@ -55,7 +59,7 @@ const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b
   <section class="notes shell" id="notes">
     <header class="chapter-head"><span class="chapter-no">三</span><div><p class="mono">CHAPTER THREE / NOTES FROM THE ROAD</p><h2>Learning, recorded.</h2></div></header>
     <p class="notes-intro">Not thought leadership. Just an honest record of decisions, dead ends, things that worked, and what I understand now that I didn’t before.</p>
-    <div class="note-list">{recentNotes.map((note,index)=><a class="note" href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`}><span class="note-index">{String(index+1).padStart(2,"0")}</span><time>{note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</time><div><small>FIELD NOTE</small><h3>{note.data.title}</h3><p>{note.data.description}</p></div><b>↗</b></a>)}</div>
+    <div class="note-list">{recentNotes.map((note,index)=><a class="note" href={`/notes/${note.id.replace(/\.(md|mdx)$/,"")}/`}><span class="note-index">{String(index+1).padStart(2,"0")}</span><time datetime={note.data.published.toISOString()}>{note.data.published.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"})}</time><div><small>FIELD NOTE</small><h3>{note.data.title}</h3><p>{note.data.description}</p></div><b>↗</b></a>)}</div>
     <div class="notes-links"><a href="/notes/">All field notes ↗</a><a href="/archive/">The earlier archive, 2014—2022 ↗</a></div>
   </section>
 
@@ -67,6 +71,5 @@ const recentNotes=(await getCollection("notes",({data})=>!data.draft)).sort((a,b
     <a class="text-link" href="mailto:hello@jesseanderson.dev">Write to me ↗</a>
   </section>
 
-  <footer class="shell"><p>Jesse Anderson · somewhere along the way</p><div><a href="https://github.com/jessecanderson">GitHub</a><a href="/rss.xml">RSS</a><a href="#top">Top ↑</a></div></footer>
 </main>
 </BaseLayout>

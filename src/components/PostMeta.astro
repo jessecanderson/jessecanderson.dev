@@ -1,0 +1,16 @@
+---
+import { formatDate } from "../lib/reading";
+interface Props {
+  published: Date;
+  updated?: Date;
+  minutes: number;
+  tags: string[];
+}
+const { published, updated, minutes, tags } = Astro.props;
+---
+<div class="post-meta">
+  <span>Published <time datetime={published.toISOString()}>{formatDate(published)}</time></span>
+  {updated && updated > published && <span>Updated <time datetime={updated.toISOString()}>{formatDate(updated)}</time></span>}
+  <span>{minutes} min read</span>
+  {tags.length > 0 && <span>{tags.join(" · ")}</span>}
+</div>

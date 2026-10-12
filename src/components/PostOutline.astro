@@ -1,0 +1,10 @@
+---
+interface Props { headings: { depth: number; slug: string; text: string }[]; }
+const headings = Astro.props.headings.filter((heading) => heading.depth === 2);
+---
+{headings.length >= 3 && <details class="post-toc">
+  <summary>In this note</summary>
+  <nav aria-label="Article outline">
+    <ol>{headings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+  </nav>
+</details>}

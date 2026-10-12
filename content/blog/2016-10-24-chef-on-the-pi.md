@@ -75,7 +75,7 @@ The next step was to install the Chef Client.
 
 After the gem is installed, you should be able to run the chef-client -v command and see the chef-client version:
 
-![chef-client-image](/img/sockeyes51_2016-Oct-17.jpg "Chef-Client Version Check")
+*The original Chef Client version-check screenshot is no longer available.*
 
 - <large> Bootstrap! </large>
 

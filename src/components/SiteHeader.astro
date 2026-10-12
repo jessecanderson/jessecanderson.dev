@@ -1,0 +1,15 @@
+---
+const isHome = Astro.url.pathname === "/";
+const isNotes = Astro.url.pathname.startsWith("/notes/");
+---
+<header id="top" class="site-header shell">
+  <a class="wordmark" href={isHome ? "#top" : "/"} aria-label="Jesse Anderson, home">
+    <b>Jesse Anderson</b><span>field notes / 旅</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    <a href={isHome ? "#path" : "/#path"}>The path</a>
+    <a href={isHome ? "#work" : "/#work"}>Current work</a>
+    <a href="/notes/" aria-current={isNotes ? (Astro.url.pathname === "/notes/" ? "page" : "location") : undefined}>Notes</a>
+  </nav>
+  <a class="header-link" href="mailto:hello@jesseanderson.dev">Say hello ↗</a>
+</header>
