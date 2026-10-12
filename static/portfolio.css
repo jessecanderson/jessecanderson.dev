@@ -374,6 +374,10 @@ a {
   font-weight: 600;
 }
 
+.studio-project h3 {
+  font-size: clamp(40px,5vw,60px);
+}
+
 .project blockquote {
   margin: 42px 0 0;
   padding-left: 18px;
